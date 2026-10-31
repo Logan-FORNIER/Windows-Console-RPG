@@ -10,4 +10,6 @@ private:
 
 public:
 	Warrior(const string& n) : Character(n, 120, 120, 12), rage(0) {}
+
+	void Attack(Character& target) override;
 };

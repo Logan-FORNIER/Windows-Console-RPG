@@ -21,9 +21,12 @@ public:
 
 	virtual void Attack(Character& target) = 0;
 
+	void Update();
+	void Render() const;
+
 	Character(const string& n, int h, int hmax, int pwr) : name(n), Hp(h), MaxHP(hmax), Power(pwr) {}
 
 	virtual ~Character() {
-		cout << name << "est supprime.\n";
+		cout << name << " est supprime.\n";
 	}
 };

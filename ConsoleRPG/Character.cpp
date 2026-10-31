@@ -11,3 +11,11 @@ void Character::TakeDamage(int dmg) {
 void Character::Attack(Character& target) {
 	target.TakeDamage(Power);
 }
+
+void Character::Update() {
+
+}
+
+void Character::Render() const {
+	cout << name << " - " << Hp << " / " << MaxHP << endl;
+}

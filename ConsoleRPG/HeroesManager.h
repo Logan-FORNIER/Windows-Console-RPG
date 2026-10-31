@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class EntityManager
+class HeroesManager
 {
 private:
 	vector<unique_ptr<Character>> heroes;
@@ -15,3 +15,4 @@ public:
 	void UpdateAll();
 	void RenderAll() const;
 };
+
