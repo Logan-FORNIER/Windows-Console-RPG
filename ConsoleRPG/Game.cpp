@@ -23,6 +23,8 @@ void Game::loop() {
 		hm.Get(0).Attack(em.Get(0));
 		em.Get(0).Attack(hm.Get(0));
 
+		im.GetKey();
+
 		for (size_t i = 0; i < em.GetSize(); i++) {
 			if (!em.Get(i).isAlive()) {
 				isRunning = false;
