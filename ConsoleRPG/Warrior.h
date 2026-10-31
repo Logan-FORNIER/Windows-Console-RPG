@@ -1,0 +1,13 @@
+#pragma once
+#include  "Character.h"
+
+using namespace std;
+
+class Warrior : public Character
+{
+private:
+	int rage;
+
+public:
+	Warrior(const string& n) : Character(n, 120, 120, 12), rage(0) {}
+};
