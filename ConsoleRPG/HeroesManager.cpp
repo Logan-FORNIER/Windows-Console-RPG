@@ -16,3 +16,7 @@ void HeroesManager::RenderAll() const {
 	for (auto& h : heroes)
 		h->Render();
 }
+
+Character& HeroesManager::Get(size_t index) {
+	return *heroes[index];
+}

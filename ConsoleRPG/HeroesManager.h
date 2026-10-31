@@ -14,5 +14,7 @@ public:
 	void Add(unique_ptr<Character> h);
 	void UpdateAll();
 	void RenderAll() const;
+
+	Character& Get(size_t index);
 };
 
