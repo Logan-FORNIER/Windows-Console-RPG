@@ -19,7 +19,7 @@ public:
 
 	void TakeDamage(int dmg);
 
-	virtual void Attack() = 0;
+	virtual void Attack(Character& target) = 0;
 
 	Character(const string& n, int h, int hmax, int pwr) : name(n), Hp(h), MaxHP(hmax), Power(pwr) {}
 

@@ -7,3 +7,7 @@ void Character::TakeDamage(int dmg) {
 		cout << name << "Est  mort";
 	}
 }
+
+void Character::Attack(Character& target) {
+	target.TakeDamage(Power);
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include "Character.h"
 
 using namespace std;
