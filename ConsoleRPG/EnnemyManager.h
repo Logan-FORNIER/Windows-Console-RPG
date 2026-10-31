@@ -14,6 +14,8 @@ public:
 	void Add(unique_ptr<Character> e);
 	void UpdateAll();
 	void RenderAll() const;
+
+	size_t GetSize() const { return ennemy.size(); }
 	
 	Character& Get(size_t index);
 };

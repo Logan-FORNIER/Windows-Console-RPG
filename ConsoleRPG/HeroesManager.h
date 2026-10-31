@@ -15,6 +15,8 @@ public:
 	void UpdateAll();
 	void RenderAll() const;
 
+	size_t GetSize() const { return heroes.size(); }
+
 	Character& Get(size_t index);
 };
 

@@ -22,9 +22,17 @@ void Game::loop() {
 
 		hm.Get(0).Attack(em.Get(0));
 
-		if (!em.Get(0).isAlive()) {
-			isRunning = false;
+		for (size_t i = 0; i < em.GetSize(); i++) {
+			if (!em.Get(i).isAlive()) {
+				isRunning = false;
+			}
 		}
+		for (size_t i = 0; i < hm.GetSize(); i++) {
+			if (!hm.Get(i).isAlive()) {
+				isRunning = false;
+			}
+		}
+
 	}
 }
 
