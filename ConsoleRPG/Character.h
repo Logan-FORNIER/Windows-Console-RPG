@@ -9,6 +9,7 @@ private:
 	int Hp;
 	int MaxHP;
 	int Power;
+	bool IsAlive;
 	string name;
 
 public:
@@ -21,7 +22,9 @@ public:
 
 	virtual void Attack(Character& target) = 0;
 
-	void Update();
+	bool isAlive() const;
+
+	void Update();	
 	void Render() const;
 
 	Character(const string& n, int h, int hmax, int pwr) : name(n), Hp(h), MaxHP(hmax), Power(pwr) {}
