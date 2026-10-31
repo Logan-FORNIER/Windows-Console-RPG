@@ -7,5 +7,5 @@ private:
 	int mana;
 
 public:
-	Mage(const string& n) : Character(n, 120, 120, 12), mana(100) {}
+	Mage(const string& n) : Character(n, 80, 80, 15), mana(100) {}
 };
