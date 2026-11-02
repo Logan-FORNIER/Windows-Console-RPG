@@ -22,11 +22,22 @@ void Game::loop() {
 
 		im.Render();
 
-		if (im.GetKey() == 'a') {
+		char KeyPlayed = im.GetKey();
+
+		if (KeyPlayed == 'a') {
 			hm.Get(0).Attack(em.Get(0));
+			em.Get(0).Attack(hm.Get(0));
 		}
 
-		em.Get(0).Attack(hm.Get(0));
+		if (KeyPlayed == 'f') {
+			cout << hm.Get(0).GetName() << " a fui le " << em.Get(0).GetName() << endl;
+			isRunning = false;
+		}
+
+		if (KeyPlayed == 'd') {
+			cout << hm.Get(0).GetName() << " Se defend !\n";
+			em.Get(0).Attack(hm.Get(0));
+		}
 
 		for (size_t i = 0; i < em.GetSize(); i++) {
 			if (!em.Get(i).isAlive()) {
