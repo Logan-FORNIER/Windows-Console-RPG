@@ -6,16 +6,11 @@ using namespace std;
 
 class InputManager
 {
-private:
-	char ch;
-
 public:
 	InputManager() {}
 
-	char GetKey() {
-		ch = _getch();
+	void Render() const;
 
-		return ch;
-	}
+	char GetKey();
 };
 

@@ -20,6 +20,8 @@ void Game::loop() {
 		hm.RenderAll();
 		em.RenderAll();
 
+		im.Render();
+
 		if (im.GetKey() == 'a') {
 			hm.Get(0).Attack(em.Get(0));
 		}
