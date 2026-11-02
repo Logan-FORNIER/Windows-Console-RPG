@@ -12,8 +12,10 @@ void EnnemyManager::UpdateAll() {
 }
 
 void EnnemyManager::RenderAll() const {
+	cout << "Ennemies :\n";
 	for (auto& h : ennemy)
 		h->Render();
+	cout << endl;
 }
 
 Character& EnnemyManager::Get(size_t index) {

@@ -13,8 +13,10 @@ void HeroesManager::UpdateAll() {
 }
 
 void HeroesManager::RenderAll() const {
+	cout << "Hero :\n";
 	for (auto& h : heroes)
 		h->Render();
+	cout << endl;
 }
 
 Character& HeroesManager::Get(size_t index) {
