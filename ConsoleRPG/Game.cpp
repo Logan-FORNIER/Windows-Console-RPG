@@ -35,7 +35,7 @@ void Game::loop() {
 		}
 
 		if (KeyPlayed == 'd') {
-			cout << hm.Get(0).GetName() << " Se defend !\n";
+			hm.Get(0).Block(em.Get(0));
 			em.Get(0).Attack(hm.Get(0));
 		}
 

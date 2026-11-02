@@ -1,6 +1,15 @@
 #include "Character.h"
 
 void Character::TakeDamage(int dmg) {
+	if (IsBlocking == true) {
+		dmg -= BlockPower;
+		if (dmg < 0) {
+			dmg = 0;
+		}
+
+		IsBlocking = false;
+	}
+
 	Hp -= dmg;
 	if (Hp <= 0) {
 		Hp = 0;
@@ -10,6 +19,10 @@ void Character::TakeDamage(int dmg) {
 
 void Character::Attack(Character& target) {
 	target.TakeDamage(Power);
+}
+
+void Character::Block(Character& target) {
+	IsBlocking = true;
 }
 
 bool Character::isAlive() const {
