@@ -4,8 +4,19 @@ using namespace std;
 
 void Game::initialize() {
 	cout << "Initialisation du jeu ...\n\n";
-	hm.Add(make_unique<Warrior>("Ronan"));
-	hm.Add(make_unique<Mage>("Icien"));
+
+	//hm.Add(make_unique<Warrior>("Ronan"));
+	//hm.Add(make_unique<Mage>("Icien"));
+
+	if (im.GetRole() == 1) {
+		hm.Add(make_unique<Warrior>(im.GetNickname()));
+	}
+	else if (im.GetRole() == 2) {
+		hm.Add(make_unique<Mage>(im.GetNickname()));
+	}
+	else {
+		
+	}
 
 	em.Add(make_unique<Goblin>("Goblin"));
 }

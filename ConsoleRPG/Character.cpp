@@ -26,7 +26,6 @@ void Character::Block(Character& target) {
 }
 
 bool Character::isAlive() const {
-
 	if (Hp <= 0) {
 		return false;
 	}

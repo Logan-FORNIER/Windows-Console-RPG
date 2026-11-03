@@ -1,7 +1,6 @@
 #include "Mage.h"
 
 void Mage::Attack(Character& target) {
-
 	if (mana < 16) {
 		cout << GetName() << " Donne un coup de baton\n";
 		target.TakeDamage(GetPower() - 8);
