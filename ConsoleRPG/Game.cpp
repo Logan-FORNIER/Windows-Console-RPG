@@ -2,53 +2,93 @@
 
 using namespace std;
 
-void Game::initialize() {
-	cout << "Initialisation du jeu ...\n\n";
+void Game::Update() {
+	switch (state)
+	{
+	case GameState::Menu:
+		Menu();
+		break;
+	case GameState::Combat:
+		UpdateCombat();
+		break;
+	}
+}
+
+void Game::UpdateCombat() {
+	im.Render();
+	char KeyPlayed = im.GetKey();
+
+	if (KeyPlayed == 'a') {
+		hm.Get(0).Attack(em.Get(0));
+		em.Get(0).Attack(hm.Get(0));
+	}
+
+	if (KeyPlayed == 'f') {
+		cout << hm.Get(0).GetName() << " a fui le " << em.Get(0).GetName() << endl;
+		isRunning = false;
+	}
+
+	if (KeyPlayed == 'd') {
+		hm.Get(0).Block(em.Get(0));
+		em.Get(0).Attack(hm.Get(0));
+	}
+}
+
+void Game::CreditMenu() {
+	cout << "Dev : EL_IKO\n";
+}
+
+void Game::Menu() {
+	cout << "[ Menu ]\n";
+	cout << "P: play, Q: Quit, C: Credit\n";
+	char MenuChoice = im.GetKey();
+
+	switch (MenuChoice)
+	{
+	case 'p':
+		cout << "Initialisation du jeu ...\n\n";
+		Initialize();
+		break;
+	case 'q':
+		cout << "Arret du jeu\n";
+		break;
+	case 'c':
+		CreditMenu();
+		break;
+	}
+}
+
+void Game::Initialize() {
 
 	//hm.Add(make_unique<Warrior>("Ronan"));
 	//hm.Add(make_unique<Mage>("Icien"));
 
-	if (im.GetRole() == 1) {
+	cout << "Selection de la class : 1: Warrior, 2: Mage\n";
+	int Role = im.NumberSecurity(1, 2);
+
+	if (Role == 1) {
 		hm.Add(make_unique<Warrior>(im.GetNickname()));
 	}
-	else if (im.GetRole() == 2) {
+	else if (Role == 2) {
 		hm.Add(make_unique<Mage>(im.GetNickname()));
-	}
-	else {
-		
 	}
 
 	em.Add(make_unique<Goblin>("Goblin"));
+
+	state = GameState::Combat;
+
 }
 
-void Game::loop() {
+void Game::Loop() {
 	isRunning = true;
 	while (isRunning)
 	{
-		hm.UpdateAll();
-		em.UpdateAll();
-
 		hm.RenderAll();
 		em.RenderAll();
 
-		im.Render();
+		UpdateCombat();
 
-		char KeyPlayed = im.GetKey();
-
-		if (KeyPlayed == 'a') {
-			hm.Get(0).Attack(em.Get(0));
-			em.Get(0).Attack(hm.Get(0));
-		}
-
-		if (KeyPlayed == 'f') {
-			cout << hm.Get(0).GetName() << " a fui le " << em.Get(0).GetName() << endl;
-			isRunning = false;
-		}
-
-		if (KeyPlayed == 'd') {
-			hm.Get(0).Block(em.Get(0));
-			em.Get(0).Attack(hm.Get(0));
-		}
+		// Condition d'arret final
 
 		for (size_t i = 0; i < em.GetSize(); i++) {
 			if (!em.Get(i).isAlive()) {

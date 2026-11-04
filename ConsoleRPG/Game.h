@@ -6,17 +6,31 @@
 #include "Mage.h"
 #include "Warrior.h"
 
+enum class GameState {
+	Menu,
+	Combat,
+	Victory,
+	Defeat,
+	Quit
+};
+
 class Game
 {
 private:
 	bool isRunning;
+	GameState state;
 	HeroesManager hm;
 	EnnemyManager em;
 	InputManager im;
 
 public:
-	void initialize();
-	void loop();
+	void Update();
+	void Menu();
+	void CreditMenu();
+	void UpdateCombat();
+
+	void Initialize();
+	void Loop();
 	void Shutdown();
 };
 

@@ -14,14 +14,6 @@ string InputManager::GetNickname() const {
 	return name;
 }
 
-int InputManager::GetRole() const {
-	int Class = role;
-	cout << "Renseigner votre Class 1: Warrior 2: Mage\n";
-	cin >> Class;
-
-	return Class;
-}
-
 int InputManager::NumberSecurity(int min, int max) const {
 	int value;
 	

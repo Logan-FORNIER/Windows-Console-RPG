@@ -6,8 +6,10 @@ using namespace std;
 int main()
 {
 	Game game;
-	game.initialize();
-	game.loop();
+
+	game.Menu();
+
+	game.Loop();
 	game.Shutdown();
 
 	return 0;

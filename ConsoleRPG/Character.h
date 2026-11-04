@@ -10,6 +10,8 @@ private:
 	int MaxHP;
 	int Power;
 	int BlockPower;
+	int Experience;
+	int Level;
 	bool IsAlive;
 	bool IsBlocking;
 	string name;
@@ -19,9 +21,13 @@ public:
 	int GetHp() const { return Hp; }
 	int GetPower() const { return Power; }
 	int GetBlockPower() const { return BlockPower; }
+	int GetExperience() const { return Experience; }
+	int GetLevel() const { return Level; }
 	string GetName() const { return name; }
 
 	void TakeDamage(int dmg);
+
+	void Train(int xp);
 
 	virtual void Attack(Character& target) = 0;
 	virtual void Block(Character& target) = 0;
