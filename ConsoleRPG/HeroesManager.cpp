@@ -19,6 +19,14 @@ void HeroesManager::RenderAll() const {
 	cout << endl;
 }
 
+void HeroesManager::RemoveHero() {
+	int i = 0;
+
+	while (i < static_cast<int>(heroes.size())) {
+		heroes.erase(heroes.begin() + i);
+	}
+}
+
 Character& HeroesManager::Get(size_t index) {
 	return *heroes[index];
 }

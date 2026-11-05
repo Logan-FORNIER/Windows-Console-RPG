@@ -41,6 +41,8 @@ void Game::UpdateCombat() {
 		hm.Get(0).Block();
 		em.Get(0).Attack(hm.Get(0));
 	}
+
+	system("cls");
 }
 
 void Game::UpdateQuit() {
@@ -79,7 +81,22 @@ void Game::UpdateDefeat() {
 }
 
 void Game::CreditMenu() {
-	cout << "Dev : EL_IKO\n";
+	system("cls");
+	std::cout << "========================================================================" << std::endl;
+	std::cout << "                          CREDITS DU PROJET                             " << std::endl;
+	std::cout << "========================================================================" << std::endl;
+	std::cout << "                                                                        " << std::endl;
+	std::cout << "   ______    _             _____   _  __     ____                       " << std::endl;
+	std::cout << "  |  ____|  | |           |_   _| | |/ /   |  __  |                     " << std::endl;
+	std::cout << "  | |__     | |             | |   | ' /    | |  | |                     " << std::endl;
+	std::cout << "  |  __|    | |             | |   |  <|    | |  | |                     " << std::endl;
+	std::cout << "  | |____   | |____   __   _| |_  | ._ \\   | |__| |                     " << std::endl;
+	std::cout << "  |______|  |______| |__| |_____| |_| \\_\\  | ____ |                     " << std::endl;
+	std::cout << "                                                                        " << std::endl;
+	std::cout << "========================================================================" << std::endl;
+	std::cout << "                     Developpe par EL_IKO                               " << std::endl;
+	std::cout << "========================================================================" << std::endl;
+	Menu();
 }
 
 void Game::Menu() {
@@ -90,6 +107,7 @@ void Game::Menu() {
 	switch (MenuChoice)
 	{
 	case 'p':
+		system("cls");
 		cout << "Initialisation du jeu ...\n\n";
 		Initialize();
 		break;
@@ -103,6 +121,9 @@ void Game::Menu() {
 }
 
 void Game::Initialize() {
+	em.RemoveEnnemies();
+	hm.RemoveHero();
+	system("cls");
 	cout << "Selection de la class : 1: Warrior, 2: Mage\n";
 	int Role = im.NumberSecurity(1, 2);
 
@@ -116,6 +137,7 @@ void Game::Initialize() {
 	em.Add(make_unique<Goblin>("Goblin"));
 
 	state = GameState::Combat;
+	system("cls");
 	Loop();
 }
 

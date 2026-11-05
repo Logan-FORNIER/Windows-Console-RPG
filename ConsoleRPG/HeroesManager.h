@@ -14,9 +14,9 @@ public:
 	void Add(unique_ptr<Character> h);
 	void UpdateAll();
 	void RenderAll() const;
+	void RemoveHero();
 
 	size_t GetSize() const { return heroes.size(); }
 
 	Character& Get(size_t index);
 };
-

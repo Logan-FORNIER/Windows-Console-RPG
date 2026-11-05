@@ -18,6 +18,14 @@ void EnnemyManager::RenderAll() const {
 	cout << endl;
 }
 
+void EnnemyManager::RemoveEnnemies() {
+	int i = 0;
+
+	while (i < static_cast<int>(ennemy.size())) {
+		ennemy.erase(ennemy.begin() + i);
+	}
+}
+
 Character& EnnemyManager::Get(size_t index) {
 	return *ennemy[index];
 }
