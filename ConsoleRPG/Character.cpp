@@ -1,6 +1,6 @@
 #include "Character.h"
 
-void Character::TakeDamage(int dmg) {
+void Character::TakeDamage(float dmg) {
 	if (IsBlocking == true) {
 		dmg -= BlockPower;
 		if (dmg < 0) {
@@ -40,12 +40,17 @@ void Character::Update() {
 
 void Character::Train(int xp) {
 	Experience += xp;
+	cout << GetName() << " gagne " << xp << " Point d'xp !\n";
 
 	while (Experience >= nextLevelExperience)
 	{
 		Experience -= nextLevelExperience;
 		Level++;
 		nextLevelExperience *= 1.5;
+
+		Power *= 1.05;
+
+		cout << "Niveau superieur ! Vous passez niveau " << Level << " !\n";
 	}
 
 }

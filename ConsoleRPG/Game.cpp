@@ -1,3 +1,4 @@
+#pragma once
 #include "Game.h"
 
 using namespace std;
@@ -7,6 +8,9 @@ void Game::Update() {
 	{
 	case GameState::Menu:
 		Menu();
+		break;
+	case GameState::Exploration:
+		UpdateLocation();
 		break;
 	case GameState::Combat:
 		UpdateCombat();
@@ -24,29 +28,119 @@ void Game::Update() {
 }
 
 void Game::UpdateCombat() {
-	im.Render();
 	char KeyPlayed = im.GetKey();
 
+	int nbEnnemis = static_cast<int>(em.GetSize());
+
 	if (KeyPlayed == 'a') {
-		hm.Get(0).Attack(em.Get(0));
-		em.Get(0).Attack(hm.Get(0));
+		cout << "Lequel attaquer ? (Entre un numero entre 0 et " << nbEnnemis - 1 << ")\n";
+
+		int targetIndex = im.NumberSecurity(0, nbEnnemis - 1);
+
+		if (targetIndex >= 0 && targetIndex < nbEnnemis && em.Get(targetIndex).isAlive()) {
+			hm.Get(0).Attack(em.Get(targetIndex));
+
+			for (int i = 0; i < nbEnnemis; i++) {
+				if (em.Get(i).isAlive()) {
+					em.Get(i).Attack(hm.Get(0));
+				}
+			}
+		}
+		else {
+			cout << "Cible invalide ou deja morte !\n";
+		}
+		system("pause");
 	}
 
 	if (KeyPlayed == 'f') {
-		cout << hm.Get(0).GetName() << " a fui le " << em.Get(0).GetName() << endl;
-		isRunning = false;
+		cout << hm.Get(0).GetName() << " a fui le combat !\n";
+		system("pause");
+		em.RemoveEnnemies();
+		state = GameState::Exploration;
 	}
 
 	if (KeyPlayed == 'd') {
 		hm.Get(0).Block();
-		em.Get(0).Attack(hm.Get(0));
+		for (int i = 0; i < nbEnnemis; i++) {
+			if (em.Get(i).isAlive()) {
+				em.Get(i).Attack(hm.Get(0));
+			}
+		}
+		system("pause");
 	}
+}
 
-	system("cls");
+void Game::GenerateRandomEvent() {
+	int pourcent = rand() % 100;
+	int luck = rand() % 2;
+
+	if (pourcent < 40) {
+		cout << "Bienvenue dans les plaines sauvages\n";
+
+		if (luck == 1) {
+			cout << "Un groupe de gobelins vous attaque !\n";
+			em.RemoveEnnemies();
+			em.Add(make_unique<Goblin>("Goblin"));
+			em.Add(make_unique<Goblin>("Goblin"));
+			em.Add(make_unique<Goblin>("Goblin"));
+
+			isBossFight = false;
+			state = GameState::Combat;
+		}
+		else {
+			cout << "Rien ne se passe.\n";
+		}
+	}
+	else if (pourcent < 70) {
+		cout << "Bienvenue dans le village\n";
+
+		if (luck == 1)
+		{
+			cout << "Un villageois vous intercepte et vous demande si vous voulez vous entrainer avec lui.\n";
+			cout << "Voulez-vous accepter l'entrainement ? (1: Oui, 2: Non)\n";
+
+			int choixEntrainement = im.NumberSecurity(1, 2);
+
+			if (choixEntrainement == 1) {
+				cout << "\nVous passez du temps a vous entrainer intensement...\n";
+				hm.Get(0).Train((rand() % 37));
+			}
+			else {
+				cout << "\nVous refusez poliment et continuez votre chemin.\n";
+			}
+		}
+		else {
+			cout << "Rien ne se passe.\n";
+		}
+	}
+	else if (pourcent < 90) {
+		cout << "Bienvenue dans le Temple Ancien\n";
+		cout << "Vous croisez au loin une silhouette etrange... C'est un Empereur Orc !\n";
+
+		em.RemoveEnnemies();
+		em.Add(make_unique<Goblin>("Empereur Orc"));
+
+		isBossFight = true;
+		state = GameState::Combat;
+	}
+	else {
+		cout << "Vous etes dans un chemin abandonne.\n";
+	}
+	system("pause");
+}
+
+void Game::UpdateLocation() {
+	cout << "Quelle direction voulez-vous prendre ? z: haut, s: bas, d: droite, q: gauche\n";
+
+	char choice = im.GetKey();
+
+	if (choice == 'z' || choice == 'q' || choice == 's' || choice == 'd') {
+		GenerateRandomEvent();
+	}
 }
 
 void Game::UpdateQuit() {
-	cout << "r: Ressayer, q: Quit\n";
+	cout << "r: Recommencer, q: Quitter\n";
 	char PlayedKey = im.GetKey();
 
 	if (PlayedKey == 'r') {
@@ -54,6 +148,7 @@ void Game::UpdateQuit() {
 	}
 	else if (PlayedKey == 'q') {
 		cout << "Fermeture du jeu\n";
+		isRunning = false;
 	}
 	else {
 		Menu();
@@ -61,27 +156,47 @@ void Game::UpdateQuit() {
 }
 
 void Game::UpdateVictory() {
-	for (size_t i = 0; i < em.GetSize(); i++) {
-		if (!em.Get(i).isAlive()) {
-			cout << "Felicitation vous avez vaincu la horde de goblin !\n";
-			isRunning = false;
+	int nbEnnemis = static_cast<int>(em.GetSize());
+	bool allEnemiesDead = true;
+
+	for (int i = 0; i < nbEnnemis; i++) {
+		if (em.Get(i).isAlive()) {
+			allEnemiesDead = false;
+			break;
+		}
+	}
+
+	if (allEnemiesDead && nbEnnemis > 0) {
+		if (isBossFight) {
+			cout << "Vous avez vaincu l'Empereur Orc et sauve le royaume !\n";
+			em.RemoveEnnemies();
+			system("pause");
 			UpdateQuit();
+		}
+		else {
+			cout << "\nVous avez repousse les gobelins avec succes ! Vous reprenez la route.\n";
+			em.RemoveEnnemies();
+			system("pause");
+			state = GameState::Exploration;
 		}
 	}
 }
 
 void Game::UpdateDefeat() {
-	for (size_t i = 0; i < hm.GetSize(); i++) {
+	int nbHeroes = static_cast<int>(hm.GetSize());
+
+	for (int i = 0; i < nbHeroes; i++) {
 		if (!hm.Get(i).isAlive()) {
-			cout << "Malheuresement vous vous etes fait capturer par la horde de Goblin\n";
-			isRunning = false;
+			cout << "\nMalheureusement vous vous etes fait vaincre...\n";
+			em.RemoveEnnemies();
+			system("pause");
 			UpdateQuit();
+			return;
 		}
 	}
 }
 
 void Game::CreditMenu() {
-	system("cls");
 	std::cout << "========================================================================" << std::endl;
 	std::cout << "                          CREDITS DU PROJET                             " << std::endl;
 	std::cout << "========================================================================" << std::endl;
@@ -96,23 +211,23 @@ void Game::CreditMenu() {
 	std::cout << "========================================================================" << std::endl;
 	std::cout << "                     Developpe par EL_IKO                               " << std::endl;
 	std::cout << "========================================================================" << std::endl;
-	Menu();
+	system("pause");
 }
 
 void Game::Menu() {
 	cout << "[ Menu ]\n";
-	cout << "P: play, Q: Quit, C: Credit\n";
+	cout << "P: Jouer, Q: Quitter, C: Credits\n";
 	char MenuChoice = im.GetKey();
 
 	switch (MenuChoice)
 	{
 	case 'p':
-		system("cls");
 		cout << "Initialisation du jeu ...\n\n";
 		Initialize();
 		break;
 	case 'q':
 		cout << "Fermeture du jeu\n";
+		isRunning = false;
 		break;
 	case 'c':
 		CreditMenu();
@@ -121,10 +236,10 @@ void Game::Menu() {
 }
 
 void Game::Initialize() {
+	srand(static_cast<unsigned int>(time(NULL)));
 	em.RemoveEnnemies();
 	hm.RemoveHero();
-	system("cls");
-	cout << "Selection de la class : 1: Warrior, 2: Mage\n";
+	cout << "Selection de la classe : 1: Warrior, 2: Mage\n";
 	int Role = im.NumberSecurity(1, 2);
 
 	if (Role == 1) {
@@ -134,10 +249,7 @@ void Game::Initialize() {
 		hm.Add(make_unique<Mage>(im.GetNickname()));
 	}
 
-	em.Add(make_unique<Goblin>("Goblin"));
-
-	state = GameState::Combat;
-	system("cls");
+	state = GameState::Exploration;
 	Loop();
 }
 
@@ -145,12 +257,22 @@ void Game::Loop() {
 	isRunning = true;
 	while (isRunning)
 	{
-		hm.RenderAll();
-		em.RenderAll();
+		system("cls");
 
-		UpdateCombat();
+		if (state == GameState::Exploration || state == GameState::Combat) {
+			hm.RenderAll();
+			em.RenderAll();
 
-		UpdateVictory();
-		UpdateDefeat();
+			if (state == GameState::Combat) {
+				im.Render();
+			}
+		}
+
+		Update();
+
+		if (state == GameState::Combat) {
+			UpdateVictory();
+			UpdateDefeat();
+		}
 	}
 }

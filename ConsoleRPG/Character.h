@@ -6,10 +6,10 @@ using namespace std;
 class Character
 {
 private:
-	int Hp;
-	int MaxHP;
-	int Power;
-	int BlockPower;
+	float Hp;
+	float MaxHP;
+	float Power;
+	float BlockPower;
 	int Experience;
 	int Level;
 	bool IsAlive;
@@ -18,17 +18,17 @@ private:
 	string name;
 
 public:
-	int GetMaxHp() const { return MaxHP; }
-	int GetHp() const { return Hp; }
-	int GetPower() const { return Power; }
-	int GetBlockPower() const { return BlockPower; }
+	float GetMaxHp() const { return MaxHP; }
+	float GetHp() const { return Hp; }
+	float GetPower() const { return Power; }
+	float GetBlockPower() const { return BlockPower; }
 	int GetExperience() const { return Experience; }
 	int GetLevel() const { return Level; }
 	float GetNextLevelExperience() const { return nextLevelExperience; }
 
 	string GetName() const { return name; }
 
-	void TakeDamage(int dmg);
+	void TakeDamage(float dmg);
 
 	void Train(int xp);
 
