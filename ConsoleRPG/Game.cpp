@@ -38,7 +38,7 @@ void Game::UpdateCombat() {
 	}
 
 	if (KeyPlayed == 'd') {
-		hm.Get(0).Block(em.Get(0));
+		hm.Get(0).Block();
 		em.Get(0).Attack(hm.Get(0));
 	}
 }

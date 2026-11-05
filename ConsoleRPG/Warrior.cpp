@@ -13,7 +13,6 @@ void Warrior::Attack(Character& target) {
 	}
 }
 
-void Warrior::Block(Character& target) {
+void Warrior::Block() {
 	cout << GetName() << " Part le coup\n";
-	target.TakeDamage(GetPower());
 }

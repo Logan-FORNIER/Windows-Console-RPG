@@ -14,7 +14,6 @@ void Mage::Attack(Character& target) {
 	}
 }
 
-void Mage::Block(Character& target) {
+void Mage::Block() {
 	cout << GetName() << " Contre le coup\n";
-	target.TakeDamage(GetPower());
 }
