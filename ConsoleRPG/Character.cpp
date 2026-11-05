@@ -21,7 +21,7 @@ void Character::Attack(Character& target) {
 	target.TakeDamage(Power);
 }
 
-void Character::Block(Character& target) {
+void Character::Block() {
 	IsBlocking = true;
 }
 
@@ -38,26 +38,17 @@ void Character::Update() {
 
 }
 
-/* void Character::Train(int xp) {
+void Character::Train(int xp) {
 	Experience += xp;
-	Level = 1;
 
-	// lvl 2 = 100 xp puis ont multiplie par 1.5 pour chaque monté en level donc level 3 = 150
-
-	Level1 = 0;
-	level2 = 100;
-	level3 = 150;
-	level4 = 225;
-
-	if (Experience == 100) {
-		Level += 1;
+	while (Experience >= nextLevelExperience)
+	{
+		Experience -= nextLevelExperience;
+		Level++;
+		nextLevelExperience *= 1.5;
 	}
-	else if (Experience == (Experience * 1.5)) {
-		Level += 1;
-	}
+
 }
-
-*/
 
 void Character::Render() const {
 	cout << name << " - " << Hp << " / " << MaxHP << endl;

@@ -25,12 +25,14 @@ private:
 
 public:
 	void Update();
+	
 	void Menu();
 	void CreditMenu();
 	void UpdateCombat();
+	void UpdateVictory();
+	void UpdateDefeat();
+	void UpdateQuit();
 
 	void Initialize();
 	void Loop();
-	void Shutdown();
 };
-

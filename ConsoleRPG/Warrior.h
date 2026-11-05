@@ -9,8 +9,8 @@ private:
 	int rage;
 
 public:
-	Warrior(const string& n) : Character(n, 120, 120, 12, 6), rage(0) {}
+	Warrior(const string& n) : Character(n, 120, 120, 12, 6, 1, 0), rage(0) {}
 
 	void Attack(Character& target) override;
-	void Block(Character& target) override;
+	void Block() override;
 };

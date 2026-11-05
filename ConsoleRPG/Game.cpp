@@ -11,6 +11,15 @@ void Game::Update() {
 	case GameState::Combat:
 		UpdateCombat();
 		break;
+	case GameState::Victory:
+		UpdateVictory();
+		break;
+	case GameState::Defeat:
+		UpdateDefeat();
+		break;
+	case GameState::Quit:
+		UpdateQuit();
+		break;
 	}
 }
 
@@ -34,6 +43,41 @@ void Game::UpdateCombat() {
 	}
 }
 
+void Game::UpdateQuit() {
+	cout << "r: Ressayer, q: Quit\n";
+	char PlayedKey = im.GetKey();
+
+	if (PlayedKey == 'r') {
+		Initialize();
+	}
+	else if (PlayedKey == 'q') {
+		cout << "Fermeture du jeu\n";
+	}
+	else {
+		Menu();
+	}
+}
+
+void Game::UpdateVictory() {
+	for (size_t i = 0; i < em.GetSize(); i++) {
+		if (!em.Get(i).isAlive()) {
+			cout << "Felicitation vous avez vaincu la horde de goblin !\n";
+			isRunning = false;
+			UpdateQuit();
+		}
+	}
+}
+
+void Game::UpdateDefeat() {
+	for (size_t i = 0; i < hm.GetSize(); i++) {
+		if (!hm.Get(i).isAlive()) {
+			cout << "Malheuresement vous vous etes fait capturer par la horde de Goblin\n";
+			isRunning = false;
+			UpdateQuit();
+		}
+	}
+}
+
 void Game::CreditMenu() {
 	cout << "Dev : EL_IKO\n";
 }
@@ -50,7 +94,7 @@ void Game::Menu() {
 		Initialize();
 		break;
 	case 'q':
-		cout << "Arret du jeu\n";
+		cout << "Fermeture du jeu\n";
 		break;
 	case 'c':
 		CreditMenu();
@@ -59,10 +103,6 @@ void Game::Menu() {
 }
 
 void Game::Initialize() {
-
-	//hm.Add(make_unique<Warrior>("Ronan"));
-	//hm.Add(make_unique<Mage>("Icien"));
-
 	cout << "Selection de la class : 1: Warrior, 2: Mage\n";
 	int Role = im.NumberSecurity(1, 2);
 
@@ -76,7 +116,7 @@ void Game::Initialize() {
 	em.Add(make_unique<Goblin>("Goblin"));
 
 	state = GameState::Combat;
-
+	Loop();
 }
 
 void Game::Loop() {
@@ -88,22 +128,7 @@ void Game::Loop() {
 
 		UpdateCombat();
 
-		// Condition d'arret final
-
-		for (size_t i = 0; i < em.GetSize(); i++) {
-			if (!em.Get(i).isAlive()) {
-				isRunning = false;
-			}
-		}
-		for (size_t i = 0; i < hm.GetSize(); i++) {
-			if (!hm.Get(i).isAlive()) {
-				isRunning = false;
-			}
-		}
-
+		UpdateVictory();
+		UpdateDefeat();
 	}
-}
-
-void Game::Shutdown() {
-	cout << "Fermeture du jeu\n";
 }

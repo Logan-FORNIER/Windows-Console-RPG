@@ -5,7 +5,6 @@ void Goblin::Attack(Character& target) {
 	target.TakeDamage(GetPower());
 }
 
-void Goblin::Block(Character& target) {
+void Goblin::Block() {
 	cout << GetName() << " Effectue contre griffe\n";
-	target.TakeDamage(GetPower());
 }

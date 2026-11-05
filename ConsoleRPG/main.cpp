@@ -9,8 +9,5 @@ int main()
 
 	game.Menu();
 
-	game.Loop();
-	game.Shutdown();
-
 	return 0;
 }
