@@ -14,6 +14,8 @@ void Mage::Attack(Character& target) {
 	}
 }
 
-void Mage::Block() {
-	cout << GetName() << " Contre le coup\n";
+bool Mage::Block() {
+	IsBlocking = true;
+	cout << GetName() << " Invoque un bouclier\n";
+	return IsBlocking;
 }

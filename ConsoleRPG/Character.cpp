@@ -2,7 +2,7 @@
 
 void Character::TakeDamage(float dmg) {
 	if (IsBlocking == true) {
-		dmg -= BlockPower;
+		dmg /= 2;
 		if (dmg < 0) {
 			dmg = 0;
 		}
@@ -21,8 +21,9 @@ void Character::Attack(Character& target) {
 	target.TakeDamage(Power);
 }
 
-void Character::Block() {
+bool Character::Block() {
 	IsBlocking = true;
+	return IsBlocking;
 }
 
 bool Character::isAlive() const {

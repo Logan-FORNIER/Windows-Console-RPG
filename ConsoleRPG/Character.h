@@ -5,11 +5,10 @@ using namespace std;
 
 class Character
 {
-private:
+protected:
 	float Hp;
 	float MaxHP;
 	float Power;
-	float BlockPower;
 	int Experience;
 	int Level;
 	bool IsAlive;
@@ -21,7 +20,6 @@ public:
 	float GetMaxHp() const { return MaxHP; }
 	float GetHp() const { return Hp; }
 	float GetPower() const { return Power; }
-	float GetBlockPower() const { return BlockPower; }
 	int GetExperience() const { return Experience; }
 	int GetLevel() const { return Level; }
 	float GetNextLevelExperience() const { return nextLevelExperience; }
@@ -33,7 +31,7 @@ public:
 	void Train(int xp);
 
 	virtual void Attack(Character& target) = 0;
-	virtual void Block() = 0;
+	virtual bool Block() = 0;
 
 	bool isAlive() const;
 	bool isBlocking() const;
@@ -41,7 +39,7 @@ public:
 	void Update();	
 	void Render() const;
 
-	Character(const string& n, int h, int hmax, int pwr, int bpwr, int lvl, int xp) : name(n), Hp(h), MaxHP(hmax), Power(pwr), BlockPower(bpwr), Level(lvl), Experience(xp) {}
+	Character(const string& n, int h, int hmax, int pwr, int lvl, int xp) : name(n), Hp(h), MaxHP(hmax), Power(pwr), Level(lvl), Experience(xp) {}
 
 	virtual ~Character() {
 		cout << name << " est supprime.\n";

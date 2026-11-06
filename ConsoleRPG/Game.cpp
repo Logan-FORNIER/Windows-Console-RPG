@@ -38,6 +38,7 @@ void Game::UpdateCombat() {
 		int targetIndex = im.NumberSecurity(0, nbEnnemis - 1);
 
 		if (targetIndex >= 0 && targetIndex < nbEnnemis && em.Get(targetIndex).isAlive()) {
+
 			hm.Get(0).Attack(em.Get(targetIndex));
 
 			for (int i = 0; i < nbEnnemis; i++) {

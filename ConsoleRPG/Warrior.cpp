@@ -13,6 +13,8 @@ void Warrior::Attack(Character& target) {
 	}
 }
 
-void Warrior::Block() {
-	cout << GetName() << " Part le coup\n";
+bool Warrior::Block() {
+	IsBlocking = true;
+	cout << GetName() << " pare le coup !\n";
+	return IsBlocking;
 }
