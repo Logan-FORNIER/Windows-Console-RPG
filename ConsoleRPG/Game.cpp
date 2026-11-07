@@ -75,15 +75,34 @@ void Game::GenerateRandomEvent() {
 	int pourcent = rand() % 100;
 	int luck = rand() % 2;
 
-	if (pourcent < 40) {
+	if (pourcent < 10) {
+		cout << "Bienvenue dans les montages\n";
+
+		if (luck == 1) {
+			cout << "Un Orc vous attaque !\n";
+			em.RemoveEnnemies();
+			em.Add(make_unique<Orc>("Orc Sauvage"));
+
+			isBossFight = false;
+			state = GameState::Combat;
+		}
+		else {
+			cout << "Rien ne se passe.\n";
+		}
+	}
+	else if (pourcent < 40) {
 		cout << "Bienvenue dans les plaines sauvages\n";
 
 		if (luck == 1) {
-			cout << "Un groupe de gobelins vous attaque !\n";
+
+			int RandEnnemies = (rand() % 3) + 1;
+
+			cout << "Un groupe de " << RandEnnemies << " gobelins vous attaque !\n";
 			em.RemoveEnnemies();
-			em.Add(make_unique<Goblin>("Goblin"));
-			em.Add(make_unique<Goblin>("Goblin"));
-			em.Add(make_unique<Goblin>("Goblin"));
+
+			for (int i = 0; i < RandEnnemies; i++) {
+				em.Add(make_unique<Goblin>("Goblin Sauvage"));
+			}
 
 			isBossFight = false;
 			state = GameState::Combat;
@@ -114,12 +133,12 @@ void Game::GenerateRandomEvent() {
 			cout << "Rien ne se passe.\n";
 		}
 	}
-	else if (pourcent < 90) {
+	else if (pourcent < 75) {
 		cout << "Bienvenue dans le Temple Ancien\n";
 		cout << "Vous croisez au loin une silhouette etrange... C'est un Empereur Orc !\n";
 
 		em.RemoveEnnemies();
-		em.Add(make_unique<Goblin>("Empereur Orc"));
+		em.Add(make_unique<EmperorOrc>("Empereur Orc"));
 
 		isBossFight = true;
 		state = GameState::Combat;
@@ -176,6 +195,10 @@ void Game::UpdateVictory() {
 		}
 		else {
 			cout << "\nVous avez repousse les gobelins avec succes ! Vous reprenez la route.\n";
+
+			int xpGagnee = nbEnnemis * 30;
+			hm.Get(0).Train(xpGagnee);
+
 			em.RemoveEnnemies();
 			system("pause");
 			state = GameState::Exploration;

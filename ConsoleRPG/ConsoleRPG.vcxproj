@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="EmperorOrc.cpp" />
     <ClCompile Include="EnnemyManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Goblin.cpp" />
@@ -148,10 +149,12 @@
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Necromancer.cpp" />
+    <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Warrior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="EmperorOrc.h" />
     <ClInclude Include="EnnemyManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Goblin.h" />
@@ -159,6 +162,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Mage.h" />
     <ClInclude Include="Necromancer.h" />
+    <ClInclude Include="Orc.h" />
     <ClInclude Include="Warrior.h" />
   </ItemGroup>
   <ItemGroup>

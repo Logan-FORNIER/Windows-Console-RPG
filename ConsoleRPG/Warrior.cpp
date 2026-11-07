@@ -16,5 +16,6 @@ void Warrior::Attack(Character& target) {
 bool Warrior::Block() {
 	IsBlocking = true;
 	cout << GetName() << " pare le coup !\n";
+	rage += 8;
 	return IsBlocking;
 }

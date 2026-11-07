@@ -6,6 +6,8 @@
 #include "Warrior.h"
 #include "Goblin.h"
 #include "Necromancer.h"
+#include "Orc.h"
+#include "EmperorOrc.h"
 
 enum class GameState {
 	Menu,
