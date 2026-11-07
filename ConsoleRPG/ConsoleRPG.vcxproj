@@ -147,6 +147,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Necromancer.cpp" />
     <ClCompile Include="Warrior.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="HeroesManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="Necromancer.h" />
     <ClInclude Include="Warrior.h" />
   </ItemGroup>
   <ItemGroup>

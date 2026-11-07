@@ -5,6 +5,7 @@
 #include "Mage.h"
 #include "Warrior.h"
 #include "Goblin.h"
+#include "Necromancer.h"
 
 enum class GameState {
 	Menu,

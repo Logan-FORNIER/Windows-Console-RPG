@@ -240,14 +240,17 @@ void Game::Initialize() {
 	srand(static_cast<unsigned int>(time(NULL)));
 	em.RemoveEnnemies();
 	hm.RemoveHero();
-	cout << "Selection de la classe : 1: Warrior, 2: Mage\n";
-	int Role = im.NumberSecurity(1, 2);
+	cout << "Selection de la classe : 1: Warrior, 2: Mage, 3: Necromancien\n";
+	int Role = im.NumberSecurity(1, 3);
 
 	if (Role == 1) {
 		hm.Add(make_unique<Warrior>(im.GetNickname()));
 	}
 	else if (Role == 2) {
 		hm.Add(make_unique<Mage>(im.GetNickname()));
+	}
+	else if (Role == 3) {
+		hm.Add(make_unique<Necromancer>(im.GetNickname()));
 	}
 
 	state = GameState::Exploration;
