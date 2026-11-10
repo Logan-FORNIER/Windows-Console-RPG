@@ -54,7 +54,7 @@ void Game::UpdateCombat() {
 	}
 
 	if (KeyPlayed == 'f') {
-		cout << hm.Get(0).GetName() << " a fui le combat !\n";
+		cout << hm.Get(0).GetName() << GREEN << " a fui le combat !\n" << DEFAULT;
 		system("pause");
 		em.RemoveEnnemies();
 		state = GameState::Exploration;
@@ -73,13 +73,13 @@ void Game::UpdateCombat() {
 
 void Game::GenerateRandomEvent() {
 	int pourcent = rand() % 100;
-	int luck = rand() % 2;
+	int luck = rand() % 3;
 
 	if (pourcent < 10) {
 		cout << "Bienvenue dans les montages\n";
 
 		if (luck == 1) {
-			cout << "Un Orc vous attaque !\n";
+			cout << RED << "Un Orc vous attaque !\n" << DEFAULT;
 			em.RemoveEnnemies();
 			em.Add(make_unique<Orc>("Orc Sauvage"));
 
@@ -97,7 +97,7 @@ void Game::GenerateRandomEvent() {
 
 			int RandEnnemies = (rand() % 3) + 1;
 
-			cout << "Un groupe de " << RandEnnemies << " gobelins vous attaque !\n";
+			cout << RED << "Un groupe de " << RandEnnemies << " gobelins vous attaque !\n" << DEFAULT;
 			em.RemoveEnnemies();
 
 			for (int i = 0; i < RandEnnemies; i++) {
@@ -116,7 +116,7 @@ void Game::GenerateRandomEvent() {
 
 		if (luck == 1)
 		{
-			cout << "Un villageois vous intercepte et vous demande si vous voulez vous entrainer avec lui.\n";
+			cout << YELLOW <<"Un villageois vous intercepte et vous demande si vous voulez vous entrainer avec lui.\n" << DEFAULT;
 			cout << "Voulez-vous accepter l'entrainement ? (1: Oui, 2: Non)\n";
 
 			int choixEntrainement = im.NumberSecurity(1, 2);
@@ -129,13 +129,34 @@ void Game::GenerateRandomEvent() {
 				cout << "\nVous refusez poliment et continuez votre chemin.\n";
 			}
 		}
+		else if (luck == 2) {
+			cout << YELLOW << "Un mage curatif vous demande si vous voulez etre soigne pour 8 piece de cuivre !\n" << DEFAULT;
+			cout << "Acceptez vous ? (1: Oui, 2: Non)\n";
+
+			int choixSoins = im.NumberSecurity(1, 2);
+
+			if (choixSoins == 1) {
+				if (hm.Get(0).GetMoney() >= 8) {
+					int heal = (rand() % 30) + 1;
+					cout << "\nLe mage vous soigne de " << heal << " PV\n";
+					hm.Get(0).Purchase(8);
+					hm.Get(0).TakeHeal(heal);
+				}
+				else {
+					cout << "\nVous n'avez pas assez d'argent le mage s'en va\n";
+				}
+			}
+			else {
+				cout << "\nVous refusez poliment et continuez votre chemin.\n";
+			}
+		}
 		else {
 			cout << "Rien ne se passe.\n";
 		}
 	}
 	else if (pourcent < 75) {
 		cout << "Bienvenue dans le Temple Ancien\n";
-		cout << "Vous croisez au loin une silhouette etrange... C'est un Empereur Orc !\n";
+		cout << RED << "Vous croisez au loin une silhouette etrange... C'est un Empereur Orc !\n" << DEFAULT;
 
 		em.RemoveEnnemies();
 		em.Add(make_unique<EmperorOrc>("Empereur Orc"));
@@ -188,16 +209,18 @@ void Game::UpdateVictory() {
 
 	if (allEnemiesDead && nbEnnemis > 0) {
 		if (isBossFight) {
-			cout << "Vous avez vaincu l'Empereur Orc et sauve le royaume !\n";
+			cout << YELLOW << "Vous avez vaincu l'Empereur Orc et sauve le royaume !\n" << DEFAULT;
 			em.RemoveEnnemies();
 			system("pause");
 			UpdateQuit();
 		}
 		else {
-			cout << "\nVous avez repousse les gobelins avec succes ! Vous reprenez la route.\n";
+			cout << GREEN << "\nVous avez repousse les gobelins avec succes ! Vous reprenez la route.\n" << DEFAULT;
 
 			int xpGagnee = nbEnnemis * 30;
+			int moneyGagnee = nbEnnemis * 3;
 			hm.Get(0).Train(xpGagnee);
+			hm.Get(0).GainMoney(moneyGagnee);
 
 			em.RemoveEnnemies();
 			system("pause");
@@ -211,7 +234,7 @@ void Game::UpdateDefeat() {
 
 	for (int i = 0; i < nbHeroes; i++) {
 		if (!hm.Get(i).isAlive()) {
-			cout << "\nMalheureusement vous vous etes fait vaincre...\n";
+			cout << RED << "\nMalheureusement vous vous etes fait vaincre...\n" << DEFAULT;
 			em.RemoveEnnemies();
 			system("pause");
 			UpdateQuit();
@@ -221,20 +244,20 @@ void Game::UpdateDefeat() {
 }
 
 void Game::CreditMenu() {
-	std::cout << "========================================================================" << std::endl;
-	std::cout << "                          CREDITS DU PROJET                             " << std::endl;
-	std::cout << "========================================================================" << std::endl;
-	std::cout << "                                                                        " << std::endl;
-	std::cout << "   ______    _             _____   _  __     ____                       " << std::endl;
-	std::cout << "  |  ____|  | |           |_   _| | |/ /   |  __  |                     " << std::endl;
-	std::cout << "  | |__     | |             | |   | ' /    | |  | |                     " << std::endl;
-	std::cout << "  |  __|    | |             | |   |  <|    | |  | |                     " << std::endl;
-	std::cout << "  | |____   | |____   __   _| |_  | ._ \\   | |__| |                     " << std::endl;
-	std::cout << "  |______|  |______| |__| |_____| |_| \\_\\  | ____ |                     " << std::endl;
-	std::cout << "                                                                        " << std::endl;
-	std::cout << "========================================================================" << std::endl;
-	std::cout << "                     Developpe par EL_IKO                               " << std::endl;
-	std::cout << "========================================================================" << std::endl;
+	cout << "========================================================================" << endl;
+	cout << "                          CREDITS DU PROJET                             " << endl;
+	cout << "========================================================================" << endl;
+	cout << "                                                                        " << endl;
+	cout << "   ______    _             _____   _  __     ____                       " << endl;
+	cout << "  |  ____|  | |           |_   _| | |/ /   |  __  |                     " << endl;
+	cout << "  | |__     | |             | |   | ' /    | |  | |                     " << endl;
+	cout << "  |  __|    | |             | |   |  <|    | |  | |                     " << endl;
+	cout << "  | |____   | |____   __   _| |_  | ._ \\   | |__| |                     " << endl;
+	cout << "  |______|  |______| |__| |_____| |_| \\_\\  | ____ |                     " << endl;
+	cout << "                                                                        " << endl;
+	cout << "========================================================================" << endl;
+	cout << "                     Developpe par EL_IKO                               " << endl;
+	cout << "========================================================================" << endl;
 	system("pause");
 }
 

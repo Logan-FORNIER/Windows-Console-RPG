@@ -9,6 +9,11 @@
 #include "Orc.h"
 #include "EmperorOrc.h"
 
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define RED "\033[31m"
+#define DEFAULT "\033[0m"
+
 enum class GameState {
 	Menu,
 	Exploration,

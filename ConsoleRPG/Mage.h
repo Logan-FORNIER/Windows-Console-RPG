@@ -7,7 +7,7 @@ private:
 	int mana;
 
 public:
-	Mage(const string& n) : Character(n, 80, 80, 15, 1, 0), mana(100) {}
+	Mage(const string& n) : Character(n, 80, 80, 15, 1, 0, 100), mana(100) {}
 
 	void Attack(Character& target) override;
 	bool Block() override;

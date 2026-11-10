@@ -17,6 +17,24 @@ void Character::TakeDamage(float dmg) {
 	}
 }
 
+void Character::TakeHeal(float heal) {
+	Hp += heal;
+	if (Hp >= MaxHP) {
+		Hp = MaxHP;
+	}
+}
+
+void Character::Purchase(int money) {
+	Money -= money;
+	if (Money == 0) {
+		cout << "Vous n'avez plus d'argent !";
+	}
+}
+
+void Character::GainMoney(int money) {
+	Money += money;
+}
+
 void Character::Attack(Character& target) {
 	target.TakeDamage(Power);
 }
@@ -53,9 +71,8 @@ void Character::Train(int xp) {
 
 		cout << "Niveau superieur ! Vous passez niveau " << Level << " !\n";
 	}
-
 }
 
 void Character::Render() const {
-	cout << name << " - " << Hp << " / " << MaxHP << endl;
+	cout << "Level : " << Level << " Experience " << Experience << " / " << nextLevelExperience << " " << name << " - " << Hp << " / " << MaxHP << " Money : " << Money << " Piece de cuivre" << endl;
 }
