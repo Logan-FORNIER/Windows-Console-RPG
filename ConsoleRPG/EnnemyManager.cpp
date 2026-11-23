@@ -1,8 +1,6 @@
 #include "EnnemyManager.h"
 
-using namespace std;
-
-void EnnemyManager::Add(unique_ptr<Character> e) {
+void EnnemyManager::Add(std::unique_ptr<Character> e) {
 	ennemy.push_back(move(e));
 }
 
@@ -12,10 +10,10 @@ void EnnemyManager::UpdateAll() {
 }
 
 void EnnemyManager::RenderAll() const {
-	cout << "Ennemies :\n";
+	std::cout << "Ennemies :\n";
 	for (auto& h : ennemy)
 		h->Render();
-	cout << endl;
+	std::cout << std::endl;
 }
 
 void EnnemyManager::RemoveEnnemies() {

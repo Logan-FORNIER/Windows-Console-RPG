@@ -1,9 +1,7 @@
 #include "Necromancer.h"
 
-using namespace std;
-
 void Necromancer::Attack(Character& target) {
-    cout << GetName() << " lance un sort d'aspiration d'ame sur " << target.GetName() << " et draine son Energy Vital !\n";
+    std::cout << GetName() << " lance un sort d'aspiration d'ame sur " << target.GetName() << " et draine son Energy Vital !\n";
 
     target.TakeDamage(Power);
 
@@ -17,6 +15,6 @@ void Necromancer::Attack(Character& target) {
 
 bool Necromancer::Block() {
     IsBlocking = true;
-    cout << GetName() << " s'entoure d'un voile d'ombres\n";
+    std::cout << GetName() << " s'entoure d'un voile d'ombres\n";
     return true;
 }

@@ -2,19 +2,17 @@
 #include <iostream>
 #include <conio.h>
 
-using namespace std;
-
 class InputManager
 {
 private:
 	int role;
-	string nickname;
+	std::string nickname;
 
 public:
 	InputManager() {}
 
 	void Render() const;
-	string GetNickname() const;
+	std::string GetNickname() const;
 
 	int NumberSecurity(int min, int max) const;
 

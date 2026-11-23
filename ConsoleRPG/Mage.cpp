@@ -2,13 +2,13 @@
 
 void Mage::Attack(Character& target) {
 	if (mana < 16) {
-		cout << GetName() << " Donne un coup de baton\n";
+		std::cout << GetName() << " Donne un coup de baton\n";
 		target.TakeDamage(GetPower() - 8);
 		mana += 7;
 	}
 	else
 	{
-		cout << GetName() << " Envoie une Boule de feu\n";
+		std::cout << GetName() << " Envoie une Boule de feu\n";
 		target.TakeDamage(GetPower());
 		mana -= 50;
 	}
@@ -16,6 +16,6 @@ void Mage::Attack(Character& target) {
 
 bool Mage::Block() {
 	IsBlocking = true;
-	cout << GetName() << " Invoque un bouclier\n";
+	std::cout << GetName() << " Invoque un bouclier\n";
 	return IsBlocking;
 }

@@ -1,8 +1,6 @@
 #pragma once
 #include "Game.h"
 
-using namespace std;
-
 void Game::Update() {
 	switch (state)
 	{
@@ -33,7 +31,7 @@ void Game::UpdateCombat() {
 	int nbEnnemis = static_cast<int>(em.GetSize());
 
 	if (KeyPlayed == 'a') {
-		cout << "Lequel attaquer ? (Entre un numero entre 0 et " << nbEnnemis - 1 << ")\n";
+		std::cout << "Lequel attaquer ? (Entre un numero entre 0 et " << nbEnnemis - 1 << ")\n";
 
 		int targetIndex = im.NumberSecurity(0, nbEnnemis - 1);
 
@@ -48,13 +46,13 @@ void Game::UpdateCombat() {
 			}
 		}
 		else {
-			cout << "Cible invalide ou deja morte !\n";
+			std::cout << "Cible invalide ou deja morte !\n";
 		}
 		system("pause");
 	}
 
 	if (KeyPlayed == 'f') {
-		cout << hm.Get(0).GetName() << GREEN << " a fui le combat !\n" << DEFAULT;
+		std::cout << hm.Get(0).GetName() << GREEN << " a fui le combat !\n" << DEFAULT;
 		system("pause");
 		em.RemoveEnnemies();
 		state = GameState::Exploration;
@@ -76,102 +74,102 @@ void Game::GenerateRandomEvent() {
 	int luck = rand() % 3;
 
 	if (pourcent < 10) {
-		cout << "Bienvenue dans les montages\n";
+		std::cout << "Bienvenue dans les montages\n";
 
 		if (luck == 1) {
-			cout << RED << "Un Orc vous attaque !\n" << DEFAULT;
+			std::cout << RED << "Un Orc vous attaque !\n" << DEFAULT;
 			em.RemoveEnnemies();
-			em.Add(make_unique<Orc>("Orc Sauvage"));
+			em.Add(std::make_unique<Orc>("Orc Sauvage"));
 
 			isBossFight = false;
 			state = GameState::Combat;
 		}
 		else {
-			cout << "Rien ne se passe.\n";
+			std::cout << "Rien ne se passe.\n";
 		}
 	}
 	else if (pourcent < 40) {
-		cout << "Bienvenue dans les plaines sauvages\n";
+		std::cout << "Bienvenue dans les plaines sauvages\n";
 
 		if (luck == 1) {
 
 			int RandEnnemies = (rand() % 3) + 1;
 
-			cout << RED << "Un groupe de " << RandEnnemies << " gobelins vous attaque !\n" << DEFAULT;
+			std::cout << RED << "Un groupe de " << RandEnnemies << " gobelins vous attaque !\n" << DEFAULT;
 			em.RemoveEnnemies();
 
 			for (int i = 0; i < RandEnnemies; i++) {
-				em.Add(make_unique<Goblin>("Goblin Sauvage"));
+				em.Add(std::make_unique<Goblin>("Goblin Sauvage"));
 			}
 
 			isBossFight = false;
 			state = GameState::Combat;
 		}
 		else {
-			cout << "Rien ne se passe.\n";
+			std::cout << "Rien ne se passe.\n";
 		}
 	}
 	else if (pourcent < 70) {
-		cout << "Bienvenue dans le village\n";
+		std::cout << "Bienvenue dans le village\n";
 
 		if (luck == 1)
 		{
-			cout << YELLOW <<"Un villageois vous intercepte et vous demande si vous voulez vous entrainer avec lui.\n" << DEFAULT;
-			cout << "Voulez-vous accepter l'entrainement ? (1: Oui, 2: Non)\n";
+			std::cout << YELLOW <<"Un villageois vous intercepte et vous demande si vous voulez vous entrainer avec lui.\n" << DEFAULT;
+			std::cout << "Voulez-vous accepter l'entrainement ? (1: Oui, 2: Non)\n";
 
 			int choixEntrainement = im.NumberSecurity(1, 2);
 
 			if (choixEntrainement == 1) {
-				cout << "\nVous passez du temps a vous entrainer intensement...\n";
+				std::cout << "\nVous passez du temps a vous entrainer intensement...\n";
 				hm.Get(0).Train((rand() % 37));
 			}
 			else {
-				cout << "\nVous refusez poliment et continuez votre chemin.\n";
+				std::cout << "\nVous refusez poliment et continuez votre chemin.\n";
 			}
 		}
 		else if (luck == 2) {
-			cout << YELLOW << "Un mage curatif vous demande si vous voulez etre soigne pour 8 piece de cuivre !\n" << DEFAULT;
-			cout << "Acceptez vous ? (1: Oui, 2: Non)\n";
+			std::cout << YELLOW << "Un mage curatif vous demande si vous voulez etre soigne pour 8 piece de cuivre !\n" << DEFAULT;
+			std::cout << "Acceptez vous ? (1: Oui, 2: Non)\n";
 
 			int choixSoins = im.NumberSecurity(1, 2);
 
 			if (choixSoins == 1) {
 				if (hm.Get(0).GetMoney() >= 8) {
 					int heal = (rand() % 30) + 1;
-					cout << "\nLe mage vous soigne de " << heal << " PV\n";
+					std::cout << "\nLe mage vous soigne de " << heal << " PV\n";
 					hm.Get(0).Purchase(8);
 					hm.Get(0).TakeHeal(heal);
 				}
 				else {
-					cout << "\nVous n'avez pas assez d'argent le mage s'en va\n";
+					std::cout << "\nVous n'avez pas assez d'argent le mage s'en va\n";
 				}
 			}
 			else {
-				cout << "\nVous refusez poliment et continuez votre chemin.\n";
+				std::cout << "\nVous refusez poliment et continuez votre chemin.\n";
 			}
 		}
 		else {
-			cout << "Rien ne se passe.\n";
+			std::cout << "Rien ne se passe.\n";
 		}
 	}
 	else if (pourcent < 75) {
-		cout << "Bienvenue dans le Temple Ancien\n";
-		cout << RED << "Vous croisez au loin une silhouette etrange... C'est un Empereur Orc !\n" << DEFAULT;
+		std::cout << "Bienvenue dans le Temple Ancien\n";
+		std::cout << RED << "Vous croisez au loin une silhouette etrange... C'est un Empereur Orc !\n" << DEFAULT;
 
 		em.RemoveEnnemies();
-		em.Add(make_unique<EmperorOrc>("Empereur Orc"));
+		em.Add(std::make_unique<EmperorOrc>("Empereur Orc"));
 
 		isBossFight = true;
 		state = GameState::Combat;
 	}
 	else {
-		cout << "Vous etes dans un chemin abandonne.\n";
+		std::cout << "Vous etes dans un chemin abandonne.\n";
 	}
 	system("pause");
 }
 
 void Game::UpdateLocation() {
-	cout << "Quelle direction voulez-vous prendre ? z: haut, s: bas, d: droite, q: gauche\n";
+	std::cout << "Quelle direction voulez-vous prendre ? z: haut, s: bas, d: droite, q: gauche\n";
 
 	char choice = im.GetKey();
 
@@ -181,14 +179,14 @@ void Game::UpdateLocation() {
 }
 
 void Game::UpdateQuit() {
-	cout << "r: Recommencer, q: Quitter\n";
+	std::cout << "r: Recommencer, q: Quitter\n";
 	char PlayedKey = im.GetKey();
 
 	if (PlayedKey == 'r') {
 		Initialize();
 	}
 	else if (PlayedKey == 'q') {
-		cout << "Fermeture du jeu\n";
+		std::cout << "Fermeture du jeu\n";
 		isRunning = false;
 	}
 	else {
@@ -209,13 +207,13 @@ void Game::UpdateVictory() {
 
 	if (allEnemiesDead && nbEnnemis > 0) {
 		if (isBossFight) {
-			cout << YELLOW << "Vous avez vaincu l'Empereur Orc et sauve le royaume !\n" << DEFAULT;
+			std::cout << YELLOW << "Vous avez vaincu l'Empereur Orc et sauve le royaume !\n" << DEFAULT;
 			em.RemoveEnnemies();
 			system("pause");
 			UpdateQuit();
 		}
 		else {
-			cout << GREEN << "\nVous avez repousse les gobelins avec succes ! Vous reprenez la route.\n" << DEFAULT;
+			std::cout << GREEN << "\nVous avez repousse les gobelins avec succes ! Vous reprenez la route.\n" << DEFAULT;
 
 			int xpGagnee = nbEnnemis * 30;
 			int moneyGagnee = nbEnnemis * 3;
@@ -234,7 +232,7 @@ void Game::UpdateDefeat() {
 
 	for (int i = 0; i < nbHeroes; i++) {
 		if (!hm.Get(i).isAlive()) {
-			cout << RED << "\nMalheureusement vous vous etes fait vaincre...\n" << DEFAULT;
+			std::cout << RED << "\nMalheureusement vous vous etes fait vaincre...\n" << DEFAULT;
 			em.RemoveEnnemies();
 			system("pause");
 			UpdateQuit();
@@ -244,36 +242,36 @@ void Game::UpdateDefeat() {
 }
 
 void Game::CreditMenu() {
-	cout << "========================================================================" << endl;
-	cout << "                          CREDITS DU PROJET                             " << endl;
-	cout << "========================================================================" << endl;
-	cout << "                                                                        " << endl;
-	cout << "   ______    _             _____   _  __     ____                       " << endl;
-	cout << "  |  ____|  | |           |_   _| | |/ /   |  __  |                     " << endl;
-	cout << "  | |__     | |             | |   | ' /    | |  | |                     " << endl;
-	cout << "  |  __|    | |             | |   |  <|    | |  | |                     " << endl;
-	cout << "  | |____   | |____   __   _| |_  | ._ \\   | |__| |                     " << endl;
-	cout << "  |______|  |______| |__| |_____| |_| \\_\\  | ____ |                     " << endl;
-	cout << "                                                                        " << endl;
-	cout << "========================================================================" << endl;
-	cout << "                     Developpe par EL_IKO                               " << endl;
-	cout << "========================================================================" << endl;
+	std::cout << "========================================================================" << std::endl;
+	std::cout << "                          CREDITS DU PROJET                             " << std::endl;
+	std::cout << "========================================================================" << std::endl;
+	std::cout << "                                                                        " << std::endl;
+	std::cout << "   ______    _             _____   _  __     ____                       " << std::endl;
+	std::cout << "  |  ____|  | |           |_   _| | |/ /   |  __  |                     " << std::endl;
+	std::cout << "  | |__     | |             | |   | ' /    | |  | |                     " << std::endl;
+	std::cout << "  |  __|    | |             | |   |  <|    | |  | |                     " << std::endl;
+	std::cout << "  | |____   | |____   __   _| |_  | ._ \\   | |__| |                     " << std::endl;
+	std::cout << "  |______|  |______| |__| |_____| |_| \\_\\  | ____ |                     " << std::endl;
+	std::cout << "                                                                        " << std::endl;
+	std::cout << "========================================================================" << std::endl;
+	std::cout << "                     Developpe par EL_IKO                               " << std::endl;
+	std::cout << "========================================================================" << std::endl;
 	system("pause");
 }
 
 void Game::Menu() {
-	cout << "[ Menu ]\n";
-	cout << "P: Jouer, Q: Quitter, C: Credits\n";
+	std::cout << "[ Menu ]\n";
+	std::cout << "P: Jouer, Q: Quitter, C: Credits\n";
 	char MenuChoice = im.GetKey();
 
 	switch (MenuChoice)
 	{
 	case 'p':
-		cout << "Initialisation du jeu ...\n\n";
+		std::cout << "Initialisation du jeu ...\n\n";
 		Initialize();
 		break;
 	case 'q':
-		cout << "Fermeture du jeu\n";
+		std::cout << "Fermeture du jeu\n";
 		isRunning = false;
 		break;
 	case 'c':
@@ -286,7 +284,7 @@ void Game::Initialize() {
 	srand(static_cast<unsigned int>(time(NULL)));
 	em.RemoveEnnemies();
 	hm.RemoveHero();
-	cout << "Selection de la classe : 1: Warrior, 2: Mage, 3: Necromancien\n";
+	std::cout << "Selection de la classe : 1: Warrior, 2: Mage, 3: Necromancien\n";
 	int Role = im.NumberSecurity(1, 3);
 
 	if (Role == 1) {

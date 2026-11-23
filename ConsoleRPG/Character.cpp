@@ -13,7 +13,7 @@ void Character::TakeDamage(float dmg) {
 	Hp -= dmg;
 	if (Hp <= 0) {
 		Hp = 0;
-		cout << name << " Est mort\n";
+		std::cout << name << " Est mort\n";
 	}
 }
 
@@ -27,7 +27,7 @@ void Character::TakeHeal(float heal) {
 void Character::Purchase(int money) {
 	Money -= money;
 	if (Money == 0) {
-		cout << "Vous n'avez plus d'argent !";
+		std::cout << "Vous n'avez plus d'argent !";
 	}
 }
 
@@ -59,7 +59,7 @@ void Character::Update() {
 
 void Character::Train(int xp) {
 	Experience += xp;
-	cout << GetName() << " gagne " << xp << " Point d'xp !\n";
+	std::cout << GetName() << " gagne " << xp << " Point d'xp !\n";
 
 	while (Experience >= nextLevelExperience)
 	{
@@ -69,10 +69,10 @@ void Character::Train(int xp) {
 
 		Power *= 1.05;
 
-		cout << "Niveau superieur ! Vous passez niveau " << Level << " !\n";
+		std::cout << "Niveau superieur ! Vous passez niveau " << Level << " !\n";
 	}
 }
 
 void Character::Render() const {
-	cout << "Level : " << Level << " Experience " << Experience << " / " << nextLevelExperience << " " << name << " - " << Hp << " / " << MaxHP << " Money : " << Money << " Piece de cuivre" << endl;
+	std::cout << "Level : " << Level << " Experience " << Experience << " / " << nextLevelExperience << " " << name << " - " << Hp << " / " << MaxHP << " Money : " << Money << " Piece de cuivre" << std::endl;
 }

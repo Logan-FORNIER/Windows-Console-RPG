@@ -1,9 +1,6 @@
 #include "HeroesManager.h"
 
-
-using namespace std;
-
-void HeroesManager::Add(unique_ptr<Character> h) {
+void HeroesManager::Add(std::unique_ptr<Character> h) {
 	heroes.push_back(move(h));
 }
 
@@ -13,10 +10,10 @@ void HeroesManager::UpdateAll() {
 }
 
 void HeroesManager::RenderAll() const {
-	cout << "Hero :\n";
+	std::cout << "Hero :\n";
 	for (auto& h : heroes)
 		h->Render();
-	cout << endl;
+	std::cout << std::endl;
 }
 
 void HeroesManager::RemoveHero() {

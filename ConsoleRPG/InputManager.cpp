@@ -1,15 +1,13 @@
 #include "InputManager.h"
 
-using namespace std;
-
 void InputManager::Render() const {
-	cout << "Touche a : Attaquer, Touche D : Defendre, Touche  F : Fuir\n";
+	std::cout << "Touche a : Attaquer, Touche D : Defendre, Touche  F : Fuir\n";
 }
 
-string InputManager::GetNickname() const {
-	string name = nickname;
-	cout << "Renseigner votre pseudonyme :\n";
-	cin >> name;
+std::string InputManager::GetNickname() const {
+	std::string name = nickname;
+	std::cout << "Renseigner votre pseudonyme :\n";
+	std::cin >> name;
 
 	return name;
 }
@@ -18,11 +16,11 @@ int InputManager::NumberSecurity(int min, int max) const {
 	int value;
 	
 	while (true) {
-		cin >> value;
-		if (cin.fail() || value < min || value > max) {
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Entrez un nombre entre " << min << " et " << max << endl;
+		std::cin >> value;
+		if (std::cin.fail() || value < min || value > max) {
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+			std::cout << "Entrez un nombre entre " << min << " et " << max << std::endl;
 		}
 		else {
 			return value;

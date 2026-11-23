@@ -1,8 +1,6 @@
 #pragma once
 #include <iostream>
 
-using namespace std;
-
 class Character
 {
 protected:
@@ -15,7 +13,7 @@ protected:
 	bool IsBlocking;
 	float nextLevelExperience = 100;
 	int Money;
-	string name;
+	std::string name;
 
 public:
 	float GetMaxHp() const { return MaxHP; }
@@ -26,7 +24,7 @@ public:
 	int GetMoney() const { return Money; }
 	float GetNextLevelExperience() const { return nextLevelExperience; }
 
-	string GetName() const { return name; }
+	std::string GetName() const { return name; }
 
 	void TakeDamage(float dmg);
 	void TakeHeal(float heal);
@@ -45,9 +43,9 @@ public:
 	void Update();	
 	void Render() const;
 
-	Character(const string& n, int h, int hmax, int pwr, int lvl, int xp, int money) : name(n), Hp(h), MaxHP(hmax), Power(pwr), Level(lvl), Experience(xp), Money(money) {}
+	Character(const std::string& n, int h, int hmax, int pwr, int lvl, int xp, int money) : name(n), Hp(h), MaxHP(hmax), Power(pwr), Level(lvl), Experience(xp), Money(money) {}
 
 	virtual ~Character() {
-		cout << name << " est supprime.\n";
+		std::cout << name << " est supprime.\n";
 	}
 };

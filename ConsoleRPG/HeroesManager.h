@@ -3,15 +3,13 @@
 #include <memory>
 #include "Character.h"
 
-using namespace std;
-
 class HeroesManager
 {
 private:
-	vector<unique_ptr<Character>> heroes;
+	std::vector<std::unique_ptr<Character>> heroes;
 
 public:
-	void Add(unique_ptr<Character> h);
+	void Add(std::unique_ptr<Character> h);
 	void UpdateAll();
 	void RenderAll() const;
 	void RemoveHero();
