@@ -14,8 +14,8 @@ void Orc::Attack(Character& target) {
 }
 
 bool Orc::Block() {
-	IsBlocking = true;
+	isBlocking = true;
 	std::cout << GetName() << " pare le coup !\n";
 	rage += 8;
-	return IsBlocking;
+	return isBlocking;
 }

@@ -35,12 +35,12 @@ void Game::UpdateCombat() {
 
 		int targetIndex = im.NumberSecurity(0, nbEnnemis - 1);
 
-		if (targetIndex >= 0 && targetIndex < nbEnnemis && em.Get(targetIndex).isAlive()) {
+		if (targetIndex >= 0 && targetIndex < nbEnnemis && em.Get(targetIndex).IsAlive()) {
 
 			hm.Get(0).Attack(em.Get(targetIndex));
 
 			for (int i = 0; i < nbEnnemis; i++) {
-				if (em.Get(i).isAlive()) {
+				if (em.Get(i).IsAlive()) {
 					em.Get(i).Attack(hm.Get(0));
 				}
 			}
@@ -61,7 +61,7 @@ void Game::UpdateCombat() {
 	if (KeyPlayed == 'd') {
 		hm.Get(0).Block();
 		for (int i = 0; i < nbEnnemis; i++) {
-			if (em.Get(i).isAlive()) {
+			if (em.Get(i).IsAlive()) {
 				em.Get(i).Attack(hm.Get(0));
 			}
 		}
@@ -199,7 +199,7 @@ void Game::UpdateVictory() {
 	bool allEnemiesDead = true;
 
 	for (int i = 0; i < nbEnnemis; i++) {
-		if (em.Get(i).isAlive()) {
+		if (em.Get(i).IsAlive()) {
 			allEnemiesDead = false;
 			break;
 		}
@@ -231,7 +231,7 @@ void Game::UpdateDefeat() {
 	int nbHeroes = static_cast<int>(hm.GetSize());
 
 	for (int i = 0; i < nbHeroes; i++) {
-		if (!hm.Get(i).isAlive()) {
+		if (!hm.Get(i).IsAlive()) {
 			std::cout << RED << "\nMalheureusement vous vous etes fait vaincre...\n" << DEFAULT;
 			em.RemoveEnnemies();
 			system("pause");

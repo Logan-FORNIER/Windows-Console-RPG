@@ -1,13 +1,13 @@
 #include "Character.h"
 
 void Character::TakeDamage(float dmg) {
-	if (IsBlocking == true) {
+	if (isBlocking == true) {
 		dmg /= 2;
 		if (dmg < 0) {
 			dmg = 0;
 		}
 
-		IsBlocking = false;
+		isBlocking = false;
 	}
 
 	Hp -= dmg;
@@ -40,11 +40,11 @@ void Character::Attack(Character& target) {
 }
 
 bool Character::Block() {
-	IsBlocking = true;
-	return IsBlocking;
+	isBlocking = true;
+	return isBlocking;
 }
 
-bool Character::isAlive() const {
+bool Character::IsAlive() const {
 	if (Hp <= 0) {
 		return false;
 	}
@@ -67,7 +67,7 @@ void Character::Train(int xp) {
 		Level++;
 		nextLevelExperience *= 1.5;
 
-		Power *= 1.05;
+		Power *= 1.05f;
 
 		std::cout << "Niveau superieur ! Vous passez niveau " << Level << " !\n";
 	}

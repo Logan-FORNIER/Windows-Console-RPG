@@ -23,19 +23,12 @@ enum class GameState {
 	Quit
 };
 
-enum class LocationType {
-	Village,
-	Temple,
-	Plaine
-};
-
 class Game
 {
 private:
 	bool isRunning;
 	bool isBossFight = false;
 	GameState state;
-	LocationType currentLocation;
 	HeroesManager hm;
 	EnnemyManager em;
 	InputManager im;

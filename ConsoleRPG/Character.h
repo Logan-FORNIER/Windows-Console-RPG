@@ -7,10 +7,10 @@ protected:
 	float Hp;
 	float MaxHP;
 	float Power;
-	int Experience;
+	float Experience;
 	int Level;
-	bool IsAlive;
-	bool IsBlocking;
+	bool isAlive;
+	bool isBlocking;
 	float nextLevelExperience = 100;
 	int Money;
 	std::string name;
@@ -19,7 +19,7 @@ public:
 	float GetMaxHp() const { return MaxHP; }
 	float GetHp() const { return Hp; }
 	float GetPower() const { return Power; }
-	int GetExperience() const { return Experience; }
+	float GetExperience() const { return Experience; }
 	int GetLevel() const { return Level; }
 	int GetMoney() const { return Money; }
 	float GetNextLevelExperience() const { return nextLevelExperience; }
@@ -37,13 +37,13 @@ public:
 	virtual void Attack(Character& target) = 0;
 	virtual bool Block() = 0;
 
-	bool isAlive() const;
-	bool isBlocking() const;
+	bool IsAlive() const;
+	bool IsBlocking() const;
 
 	void Update();	
 	void Render() const;
 
-	Character(const std::string& n, int h, int hmax, int pwr, int lvl, int xp, int money) : name(n), Hp(h), MaxHP(hmax), Power(pwr), Level(lvl), Experience(xp), Money(money) {}
+	Character(const std::string& n, float h, float hmax, float pwr, int lvl, float xp, int money, bool alive, bool blocking) : name(n), Hp(h), MaxHP(hmax), Power(pwr), Level(lvl), Experience(xp), Money(money), isAlive(alive), isBlocking(blocking) {}
 
 	virtual ~Character() {
 		std::cout << name << " est supprime.\n";

@@ -14,8 +14,8 @@ void EmperorOrc::Attack(Character& target) {
 }
 
 bool EmperorOrc::Block() {
-	IsBlocking = true;
+	isBlocking = true;
 	std::cout << GetName() << " pare le coup !\n";
 	rage += 10;
-	return IsBlocking;
+	return isBlocking;
 }

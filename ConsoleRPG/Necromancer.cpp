@@ -14,7 +14,7 @@ void Necromancer::Attack(Character& target) {
 }
 
 bool Necromancer::Block() {
-    IsBlocking = true;
+    isBlocking = true;
     std::cout << GetName() << " s'entoure d'un voile d'ombres\n";
-    return true;
+    return isBlocking;
 }

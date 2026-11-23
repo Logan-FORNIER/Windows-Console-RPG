@@ -15,7 +15,7 @@ void Mage::Attack(Character& target) {
 }
 
 bool Mage::Block() {
-	IsBlocking = true;
+	isBlocking = true;
 	std::cout << GetName() << " Invoque un bouclier\n";
-	return IsBlocking;
+	return isBlocking;
 }

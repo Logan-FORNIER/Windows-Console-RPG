@@ -6,7 +6,7 @@ void Goblin::Attack(Character& target) {
 }
 
 bool Goblin::Block() {
-	IsBlocking = true;
+	isBlocking = true;
 	std::cout << GetName() << " Effectue contre griffe\n";
-	return IsBlocking;
+	return isBlocking;
 }

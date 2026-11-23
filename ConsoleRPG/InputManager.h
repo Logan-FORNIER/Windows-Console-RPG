@@ -5,7 +5,7 @@
 class InputManager
 {
 private:
-	int role;
+	int role = 0;
 	std::string nickname;
 
 public:
