@@ -133,7 +133,7 @@ void Game::GenerateRandomEvent() {
 
 			int choixSoins = im.NumberSecurity(1, 2);
 
-			if (choixSoins == 1) {
+			if (choixSoins == 1 && hm.Get(0).GetHp() != hm.Get(0).GetMaxHp()) {
 				if (hm.Get(0).GetMoney() >= 8) {
 					int heal = (rand() % 30) + 1;
 					std::cout << "\nLe mage vous soigne de " << heal << " PV\n";
